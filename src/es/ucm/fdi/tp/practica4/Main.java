@@ -291,6 +291,7 @@ public class Main {
 			CommandLine line = parser.parse(cmdLineOptions, args);
 			parseHelpOption(line, cmdLineOptions);
 			parseDimOptionn(line);
+			parseObstaclesOptions(line);
 			parseGameOption(line);
 			parseViewOption(line);
 			parseMultiViewOption(line);

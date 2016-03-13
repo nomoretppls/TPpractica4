@@ -27,7 +27,7 @@ public class AtaxxFactory implements GameFactory {
 	}
 	public AtaxxFactory(int dimCustom){
 		if(dimCustom < 5 ){
-			throw new GameError("Dimension must be betwen 5 and 7");
+			throw new GameError("Dimension must be  at least 5:"+ dim);
 		} else {
 			this.dim = dimCustom;
 			this.obstacles=0;
