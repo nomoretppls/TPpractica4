@@ -21,6 +21,8 @@ import es.ucm.fdi.tp.basecode.bgame.views.GenericConsoleView;
 public class AtaxxFactory implements GameFactory {
 	private int dim;
 	private int obstacles;
+	
+	
 	public AtaxxFactory(){
 		this.dim=5;
 		this.obstacles = 0;

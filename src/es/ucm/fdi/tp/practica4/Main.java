@@ -1,6 +1,11 @@
 package es.ucm.fdi.tp.practica4;
 
+
 import java.util.ArrayList;
+
+
+
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,6 +32,11 @@ import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
 import es.ucm.fdi.tp.practica4.ataxx.AtaxxFactory;
 
 /**
+ * @author J. Henry Yanchapanta 
+ * @author Seilys Iglesias
+ */
+
+/**
  * This is the class with the main method for the board games application.
  * 
  * It uses the Commons-CLI library for parsing command-line arguments: the game
@@ -40,6 +50,7 @@ import es.ucm.fdi.tp.practica4.ataxx.AtaxxFactory;
  * sobre esta libreria en {@link https://commons.apache.org/proper/commons-cli/}
  * .
  */
+
 public class Main {
 
 	/**

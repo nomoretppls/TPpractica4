@@ -106,11 +106,7 @@ public class AtaxxRules implements GameRules {
 		return 4;
 	}
 
-	// devuelve la posicion con mayor cantidad de piezas
-	public int compara(int[] array) {
-
-		return 0;
-	}
+	
 	
 	/**Metodo que coloca los obstaculos en el atributo de la clase{@link AtaxxRules},
 	 * de manera simetrica.
@@ -134,9 +130,9 @@ public class AtaxxRules implements GameRules {
 		}
 	}
 	
-	/**Metodo que devuelve el valor simetrico de un valor dado
-	 * @param origin
-	 * @return
+	/**Metodo que devuelve el valor simetrico , en el tablero ,de un valor dado.
+	 * @param origin es una  componente de una coordenada de una posicion del tablero.
+	 * @return valor simetrico en el tablero, respecto del origen y el centro del tablero.
 	 */
 	private int sym(int origin){
 
@@ -154,18 +150,7 @@ public class AtaxxRules implements GameRules {
 	@Override
 	public Pair<State, Piece> updateState(Board board, List<Piece> pieces, Piece turn) {
 		// TODO Auto-generated method stub
-		// creo un array para poner en este las cantidades de cada jugador
-		// int[] cantidad = new int[pieces.size()];
-		// // si no está llena, aún no termina el juego
-		// if (!board.isFull()) {
-		// return gameInPlayResult;
-		// } else {
-		// for (int i = 0; i < pieces.size(); i++) {
-		// cantidad[i] = board.getPieceCount(pieces.get(i));
-		// }
-		// int mayor = compara(cantidad);
-		// return (new Pair<State, Piece>(State.Won, pieces.get(mayor)));
-		// }
+		
 		Pair<State, Piece> res = new Pair<State, Piece>(State.InPlay, null);
 
 		if (board.isFull()) {
@@ -180,7 +165,7 @@ public class AtaxxRules implements GameRules {
 	/**Metodo que determina si los jugadores estan bloqueados, excepto uno.
 	 * @param board tablero de la partida.
 	 *		
-	 * @param pieceslista de las fichas de los jugadores.
+	 * @param pieces lista de las fichas de los jugadores.
 	 * @return
 	 */
 	protected boolean playersBlocked(Board board, List<Piece> pieces){
@@ -264,6 +249,13 @@ public class AtaxxRules implements GameRules {
 
 	}
 
+	/**Metodo que determina los posibles movimientos de una ficha en una posicion del tablero.
+	 * @param board tablero de ljuego.
+	 * @param piece ficha de la cual se quiere determinar los posibles movimientos.
+	 * @param row fila de la ficha consultada.
+	 * @param col columna  de la ficha consultada.
+	 * @return
+	 */
 	protected List<GameMove> valMovePiece(Board board, Piece piece, int row, int col) {
 
 		int rows = board.getRows();

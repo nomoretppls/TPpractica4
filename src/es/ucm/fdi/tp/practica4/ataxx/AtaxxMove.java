@@ -110,6 +110,12 @@ public class AtaxxMove extends GameMove {
 		}
 		this.convertPiecesArr(board, pieces, piece);
 	}
+	
+/**Este metodo convierte las fichas alrededor  de la ficha que se ha movido.
+ * @param board tablero del juego.
+ * @param pieces fichas de los jugadores.
+ * @param piece ficha del jugador.
+ */
 private void convertPiecesArr(Board board, List<Piece> pieces, Piece piece){
 		
 		int rows = board.getRows();
