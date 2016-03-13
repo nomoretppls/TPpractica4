@@ -138,6 +138,7 @@ public class Main {
 	 * Juego por defecto.
 	 */
 	final private static GameInfo DEFAULT_GAME = GameInfo.CONNECTN;
+	//final private static GameInfo DEFAULT_GAME = GameInfo.ATAXX;
 
 	/**
 	 * default view to use.

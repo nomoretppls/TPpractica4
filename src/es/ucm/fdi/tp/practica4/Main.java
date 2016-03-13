@@ -24,6 +24,7 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.connectN.ConnectNFactory;
 import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
+import es.ucm.fdi.tp.practica4.ataxx.AtaxxFactory;
 
 /**
  * This is the class with the main method for the board games application.
@@ -137,7 +138,8 @@ public class Main {
 	 * <p>
 	 * Juego por defecto.
 	 */
-	final private static GameInfo DEFAULT_GAME = GameInfo.CONNECTN;
+	//final private static GameInfo DEFAULT_GAME = GameInfo.CONNECTN;
+	final private static GameInfo DEFAULT_GAME = GameInfo.Ataxx;
 
 	/**
 	 * default view to use.
@@ -238,6 +240,18 @@ public class Main {
 	 * utiliza, por lo que siempre es {@code null}.
 	 */
 	private static AIAlgorithm aiPlayerAlg;
+	
+	//para los obstaculos
+	/**
+	 * Number of columns provided with the option -o ({@code null} if not
+	 * provided).
+	 * 
+	 * <p>
+	 * Numero de columnas proporcionadas con la opcion -o, o {@code null} si no
+	 * se incluye la opcion -o.
+	 * 
+	 */
+	private static Integer obstacles;
 
 	/**
 	 * Processes the command-line arguments and modify the fields of this
@@ -269,7 +283,7 @@ public class Main {
 																// --multiviews
 		cmdLineOptions.addOption(constructPlayersOption()); // -p or --players
 		cmdLineOptions.addOption(constructDimensionOption()); // -d or --dim
-
+		cmdLineOptions.addOption(constructObstacleOption()); // -o or --obstacle
 		// parse the command line as provided in args
 		//
 		CommandLineParser parser = new DefaultParser();
@@ -398,6 +412,49 @@ public class Main {
 		Option opt = new Option("p", "players", true, optionInfo);
 		opt.setArgName("list of players");
 		return opt;
+	}
+	//para  poner obstaculos
+	/**
+	 * Builds the obstacles (-o or --obstacles) CLI option.
+	 * 
+	 * <p>
+	 * Construye la opcion CLI -o.
+	 * 
+	 * @return CLI {@link Option} the obstacles option.
+	 *         <p>
+	 *         Objeto {@link Option} de esta opcion.
+	 */
+	private static Option constructObstacleOption(){
+		Option opt = new Option("o", "obstacles", true, "The number of obstacles on the board must have positive");
+		opt.setArgName("obstacles number");
+		return opt;
+	}
+	
+	/**
+	 * Parses the obstacles option (-o or --obstacles). It sets the value of
+	 * {@link #obstacles} accordingly.
+	 *
+	 * <p>
+	 * Extrae la opcion obstaculos (-o) y asigna el valor de {@link #obstaculos}
+	 * 
+	 * @param line
+	 *            CLI {@link CommandLine} object.
+	 * @throws ParseException
+	 *             If an invalid value is provided (@see
+	 *             {@link #constructObstaclesOption()}).
+	 *             <p>
+	 *             Si se proporciona un valor invalido (@see
+	 *             {@link #constructObstaclesOption()}).
+	 */
+	private static void parseObstaclesOptions(CommandLine line) throws ParseException {
+		String obstaclesVal = line.getOptionValue("o");
+		if(obstaclesVal != null){
+			try{
+				obstacles =  Integer.parseInt(obstaclesVal);
+			}catch(NumberFormatException e){
+				throw new ParseException("Invalid number obstacles" + obstaclesVal);
+			}
+		}
 	}
 
 	/**
@@ -531,6 +588,18 @@ public class Main {
 			break;
 		case TicTacToe:
 			gameFactory = new TicTacToeFactory();
+			break;
+		case Ataxx:
+			if (dimRows != null && dimCols != null && dimRows == dimCols) {
+				if(obstacles != null)
+					gameFactory = new AtaxxFactory(dimRows, obstacles);
+				else
+					gameFactory = new AtaxxFactory(dimRows);		
+			} else 
+				if(obstacles != null)
+					gameFactory = new AtaxxFactory(5, obstacles);
+				else
+					gameFactory = new AtaxxFactory();
 			break;
 		default:
 			throw new UnsupportedOperationException("Something went wrong! This program point should be unreachable!");
